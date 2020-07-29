@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    //Public variables
     public float mouseSensitivity = 125f;
 
     public Transform playerBody;
-
+    //Private variables
     float xRotation = 0f;
 
 	// Use this for initialization

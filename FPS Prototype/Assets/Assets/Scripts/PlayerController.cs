@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float playerSpeed = 10f;
     public float gravity = -9.81f;
     public float checkSphereRadius = 0.3f;
+    public float jumpHeight = 2.5f;
 
     public CharacterController characterController;
 
@@ -28,6 +29,11 @@ public class PlayerController : MonoBehaviour
         //Allowing player to move
         Vector3 movingDirection = transform.right * xAxis + transform.forward * zAxis;
         characterController.Move(movingDirection * playerSpeed * Time.deltaTime);
+        //Allowing player to jump y = sqrt(h * -2 * g)
+        if(isGrounded && Input.GetButtonDown("Jump"))
+        {
+            gravityVelocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
+        }
         //Calculating gravity delta y = (1/2*g)*t^2
         gravityVelocity.y += gravity * Time.deltaTime;
         characterController.Move(gravityVelocity * Time.deltaTime);

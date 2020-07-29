@@ -33,5 +33,9 @@ public class PlayerController : MonoBehaviour
         characterController.Move(gravityVelocity * Time.deltaTime);
         //Checking if player is on ground
         isGrounded = Physics.CheckSphere(groundCheck.position, checkSphereRadius, groundMask);
+        if(isGrounded && gravityVelocity.y < 0)
+        {
+            gravityVelocity.y = -2f;
+        }
     }
 }

@@ -12,6 +12,9 @@ public class GunFire : MonoBehaviour
     public ParticleSystem smallMuzzleFlash;
     public ParticleSystem sniperMuzzleFlash;
 
+    public AudioClip pistolSound;
+    public AudioClip sniperSound;
+
     public GameManager gameManager;
 
 
@@ -24,6 +27,9 @@ public class GunFire : MonoBehaviour
     public float smallFireRate = 10f;
 
     //Private variables
+    AudioSource pistol;
+    AudioSource sniper;
+
     float nextTimeToFire = 0f;
     
     //Use this for initialization
@@ -31,6 +37,9 @@ public class GunFire : MonoBehaviour
     {
         //Assigning GameManager component to gameManager variable
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        //
+        pistol = GetComponent<AudioSource>();
+        sniper = GetComponent<AudioSource>();
     }
 
     //Update is called once per frame
@@ -70,6 +79,8 @@ public class GunFire : MonoBehaviour
         {
             //Playing muzzle flash effect
             smallMuzzleFlash.Play();
+            //Playing pistol shot sound
+            pistol.PlayOneShot(pistolSound, 1.0f);
             //Checking if ray hits something
             if (Physics.Raycast(gameCamera.transform.position, gameCamera.transform.forward, out hitInfo, smallRange))
             {
@@ -95,6 +106,8 @@ public class GunFire : MonoBehaviour
         {
             //Playing muzzle flash effect
             sniperMuzzleFlash.Play();
+            //Playing sniper shot sound
+            sniper.PlayOneShot(sniperSound, 1.0f);
             //Checking if ray hits something
             if (Physics.Raycast(gameCamera.transform.position, gameCamera.transform.forward, out hitInfo, sniperRange))
             {

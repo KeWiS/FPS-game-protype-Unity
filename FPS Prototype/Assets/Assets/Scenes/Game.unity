@@ -449,16 +449,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 705433fc2a122904f8e6499711fa0139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 13
-  gravity: -9.81
-  checkSphereRadius: 0.3
-  jumpHeight: 2.5
   characterController: {fileID: 414848215}
   groundCheck: {fileID: 1620416777}
   groundMask:
     serializedVersion: 2
     m_Bits: 512
   gameManager: {fileID: 0}
+  playerSpeed: 13
+  gravity: -9.81
+  checkSphereRadius: 0.3
+  jumpHeight: 2.5
 --- !u!23 &414848211
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -509,6 +509,8 @@ MonoBehaviour:
   smallGunCrosshair: {fileID: 2037752728}
   sniperRifleCrosshair: {fileID: 812623261}
   gameManager: {fileID: 0}
+  smallWeapon: {fileID: 1844205825}
+  sniperWeapon: {fileID: 2059504100}
   smallGunDrawed: 1
 --- !u!33 &414848213
 MeshFilter:
@@ -644,9 +646,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 066f1d01092a6f74286d4e3837666aeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 125
   playerBody: {fileID: 414848214}
   gameManager: {fileID: 0}
+  mouseSensitivity: 125
 --- !u!1 &673125885
 GameObject:
   m_ObjectHideFlags: 0
@@ -2123,6 +2125,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4910477678608072, guid: 3905b13fa53e6344eaaeb6993247e29d,
     type: 2}
   m_PrefabInternal: {fileID: 1688880915}
+--- !u!114 &1844205825 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114417764576231144, guid: 3905b13fa53e6344eaaeb6993247e29d,
+    type: 2}
+  m_PrefabInternal: {fileID: 1688880915}
+  m_Script: {fileID: 11500000, guid: 812db8328691e2f44883b7ce4e8e1fe9, type: 3}
 --- !u!1 &1859785475
 GameObject:
   m_ObjectHideFlags: 0
@@ -2726,6 +2734,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4384874954717432, guid: cfcb332d67619214087fa9778edd768a,
     type: 2}
   m_PrefabInternal: {fileID: 882952324}
+--- !u!114 &2059504100 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114315788543377452, guid: cfcb332d67619214087fa9778edd768a,
+    type: 2}
+  m_PrefabInternal: {fileID: 882952324}
+  m_Script: {fileID: 11500000, guid: 812db8328691e2f44883b7ce4e8e1fe9, type: 3}
 --- !u!1 &2084188628
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,11 +3,6 @@
 public class PlayerController : MonoBehaviour
 {
     //Public variables
-    public float playerSpeed = 13f;
-    public float gravity = -9.81f;
-    public float checkSphereRadius = 0.3f;
-    public float jumpHeight = 2.5f;
-
     public CharacterController characterController;
 
     public Transform groundCheck;
@@ -15,28 +10,41 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundMask;
 
     public GameManager gameManager;
-    //Private variables
-    bool isGrounded;
 
+
+    public float playerSpeed = 13f;
+    public float gravity = -9.81f;
+    public float checkSphereRadius = 0.3f;
+    public float jumpHeight = 2.5f;
+
+    //Private variables
     Vector3 gravityVelocity;
+
+    bool isGrounded;
 
     //Use this for initialization
     void Start()
     {
+        //Assigning GameManager component to gameManager variable
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     //Update is called once per frame
     void Update ()
     {
+        //Checking if game is still running
         if (!gameManager.gameOver)
         {
             //Getting keyboard inputs
             float xAxis = Input.GetAxis("Horizontal");
             float zAxis = Input.GetAxis("Vertical");
+            //Calling moving method
             Move(xAxis, zAxis);
+            //Calling jumping method
             Jump();
+            //Calling gravity calculations method
             Gravity();
+            //Calling ground check method
             GroundCheck();
         }
     }

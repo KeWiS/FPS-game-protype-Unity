@@ -15,17 +15,20 @@ public class WeaponSwitch : MonoBehaviour
     //Use this for initialization
     void Start()
     {
+        //Assigning GameManager component to gameManager variable
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     //Update is called once per frame
     void Update ()
     {
+        //Checking if game is still running
         if (!gameManager.gameOver)
         {
             //Checking if player pressed Q key
             if (Input.GetKeyDown(KeyCode.Q))
             {
+                //Calling gun switching method
                 GunSwitch();
             }
         }
@@ -45,6 +48,8 @@ public class WeaponSwitch : MonoBehaviour
         }
         else
         {
+            //Unscoping if scoped
+            gameManager.Unscope();
             //Changing weapon to small gun
             sniperRifle.SetActive(false);
             smallGun.SetActive(true);

@@ -3,22 +3,7 @@
 public class GunFire : MonoBehaviour
 {
     //Public variables
-    public float smallDamage = 20f;
-    public float sniperDamage = 50f;
-    public float sniperRange = 1000f;
-    public float smallRange = 350f;
-    public float smallForce = 25f;
-    public float sniperForce = 75f;
-    public float smallFireRate = 10f;
-    public float sniperFireRate = 0.1f;
-    public float nextTimeToFire = 0f;
-
-    //public float bulletSpeed = 100f;
-
-    public GameObject bullet;
     public GameObject impactPrefab;
-    //public GameObject smallBulletPos;
-    //public GameObject sniperBulletPos;
     
     public Camera gameCamera;
 
@@ -29,27 +14,47 @@ public class GunFire : MonoBehaviour
 
     public GameManager gameManager;
 
+
+    public float smallDamage = 20f;
+    public float sniperDamage = 50f;
+    public float sniperRange = 1000f;
+    public float smallRange = 350f;
+    public float smallForce = 25f;
+    public float sniperForce = 75f;
+    public float smallFireRate = 10f;
+
+    //Private variables
+    float nextTimeToFire = 0f;
+    
     //Use this for initialization
     void Start()
     {
+        //Assigning GameManager component to gameManager variable
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     //Update is called once per frame
     void Update ()
     {
+        //Checking if game is still running
         if (!gameManager.gameOver)
         {
+            //Checking if player pressed fire mouse button
             if (Input.GetButtonDown("Fire1"))
             {
-                if (gun.smallGunDrawed)
+                //Checking which gun is in player's hands
+                if (gun.smallGunDrawed && Time.time >= nextTimeToFire)
                 {
+                    //Calculating next shooting time for handgun
                     nextTimeToFire = Time.time + 1f / smallFireRate;
+                    //Calling shooting method
                     Shoot();
                 }
-                else
+                else if(Time.time >= nextTimeToFire)
                 {
-                    nextTimeToFire = Time.time + 1f / sniperFireRate;
+                    //Calculating next shooting time for sniper rifle
+                    nextTimeToFire = Time.time + 1f;
+                    //Calling shooting method
                     Shoot();
                 }
             }
@@ -58,42 +63,56 @@ public class GunFire : MonoBehaviour
     //Shooting gun method
     void Shoot ()
     { 
+        //Declaring raycast info variable
         RaycastHit hitInfo;
+        //Checking if pistol is in player's hands
         if (gun.smallGunDrawed)
         {
+            //Playing muzzle flash effect
             smallMuzzleFlash.Play();
+            //Checking if ray hits something
             if (Physics.Raycast(gameCamera.transform.position, gameCamera.transform.forward, out hitInfo, smallRange))
             {
+                //Getting info from hit target
                 HitTarget target = hitInfo.transform.GetComponent<HitTarget>();
+                //Checking if ray hit small enemy target
                 if(target != null && target.CompareTag("SmallEnemyTarget"))
                 {
+                    //Calling damage taking method
                     target.TakeDamage(smallDamage);
                 }
-
+                //Checking if hit target has rigidbody
                 if(hitInfo.rigidbody != null)
                 {
+                    //Applying force to hit target
                     hitInfo.rigidbody.AddForce(-hitInfo.normal * smallForce, ForceMode.Impulse);
                 }
-
+                //Playing impact effect
                 Instantiate(impactPrefab, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
             }
         }
         else
         {
+            //Playing muzzle flash effect
             sniperMuzzleFlash.Play();
+            //Checking if ray hits something
             if (Physics.Raycast(gameCamera.transform.position, gameCamera.transform.forward, out hitInfo, sniperRange))
             {
+                //Getting info from hit target
                 HitTarget target = hitInfo.transform.GetComponent<HitTarget>();
+                //Checking if ray hit sniper enemy target
                 if (target != null && target.CompareTag("SniperEnemyTarget"))
                 {
+                    //Calling damage taking method
                     target.TakeDamage(sniperDamage);
                 }
-
+                //Checking if hit target has rigidbody
                 if (hitInfo.rigidbody != null)
                 {
+                    //Applying force to hit target
                     hitInfo.rigidbody.AddForce(-hitInfo.normal * sniperForce, ForceMode.Impulse);
                 }
-
+                //Playing impact effect
                 Instantiate(impactPrefab, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
             }
         }

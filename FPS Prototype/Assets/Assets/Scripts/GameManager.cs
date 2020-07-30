@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> targets;
 
+
     public int enemyCount;
 
     public bool gameOver = false;
@@ -38,7 +39,7 @@ public class GameManager : MonoBehaviour
     int sniperRifleTargets = 3;
 
     //Use this for initialization
-    void Start ()
+    void Start()
     {
         //Score variable and method
         score = 0;
@@ -60,43 +61,44 @@ public class GameManager : MonoBehaviour
     //Update is called once per frame
     private void Update()
     {
-        if (!gun.smallGunDrawed && !gameOver)
+
+        //If right mouse button is pressed sniper scope appear
+        if (Input.GetButton("Fire2"))
         {
-            if (Input.GetButton("Fire2"))
-            {
-                sniperCrosshair.SetActive(false);
-                sniperScope.SetActive(true);
-                Camera.main.fieldOfView = scopedCameraFov;
-            }
-            else if (Input.GetButtonUp("Fire2"))
-            {
-                sniperScope.SetActive(false);
-                sniperCrosshair.SetActive(true);
-                Camera.main.fieldOfView = normalCameraFov;
-            }
+            //Changing to scope crosshair and camera fov
+            Scope();
         }
+        else if (Input.GetButtonUp("Fire2"))
+        {
+            //Changing to normal scope and camera fov
+            Unscope();
+        }
+
+        //What happens when game end (every target is dead)
         if (enemyCount <= 0)
         {
-            sniperScope.SetActive(false);
-            Camera.main.fieldOfView = normalCameraFov;
+            //Showing ending screen
             endScreen.SetActive(true);
-            if(!gun.smallGunDrawed) sniperCrosshair.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            //Changing to normal scope and camera fov
+            Unscope();
+            //Unlocking and showing cursor
+            CursorUnlock();
+            //Setting game to gameOver state
             gameOver = true;
+            //Starting coroutine to automatically restart game
             StartCoroutine(GameRestart(restartTime));
         }
     }
 
     //Score updating method
-    public void ScoreUpdate (int scoreToAdd)
+    public void ScoreUpdate(int scoreToAdd)
     {
         score += scoreToAdd;
         scoreText.text = "Score: " + score;
     }
 
     //Random spawn positions method
-    Vector3 GenerateSpawnPosition ()
+    Vector3 GenerateSpawnPosition()
     {
         float spawnPosX = Random.Range(spawnMinX, spawnMaxX);
         float spawnPosZ = Random.Range(spawnMinZ, spawnMaxZ);
@@ -105,16 +107,48 @@ public class GameManager : MonoBehaviour
     }
 
     //Restarting game method
-    public void RestartGame ()
+    public void RestartGame()
     {
+        //Reloading scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //Setting gameOver state to false
         gameOver = false;
     }
 
     //Main menu game method
-    public void MainMenu ()
+    public void MainMenu()
     {
+        //Loading menu scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
+
+    //Setting sniper to scope mode method
+    void Scope()
+    {
+        //Checking if sniper is equiped and game is not over
+        if (!gun.smallGunDrawed && !gameOver)
+        {
+            sniperCrosshair.SetActive(false);
+            sniperScope.SetActive(true);
+            Camera.main.fieldOfView = scopedCameraFov;
+        }
+    }
+    //Setting sniper to normal mode method
+    public void Unscope()
+    {
+        //Checking if sniper is equiped and game is not over
+        if (!gun.smallGunDrawed && !gameOver)
+        {
+            sniperScope.SetActive(false);
+            sniperCrosshair.SetActive(true);
+            Camera.main.fieldOfView = normalCameraFov;
+        }
+    }
+    //Unlocking and showing cursor method
+    void CursorUnlock ()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     //Coroutine for game restarting

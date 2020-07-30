@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -7,7 +8,15 @@ public class GameManager : MonoBehaviour
 {
     //Public variables
     public Text scoreText;
+    public Text endText;
+
     public GameObject endScreen;
+    public GameObject sniperScope;
+    public GameObject sniperCrosshair;
+
+    public Camera gameCamera;
+
+    public WeaponSwitch gun;
 
     public List<GameObject> targets;
 
@@ -18,8 +27,11 @@ public class GameManager : MonoBehaviour
     //Private variables
     float spawnMinX = -40f;
     float spawnMaxX = 50f;
-    float spawnMinZ = -8f;
-    float spawnMaxZ = 85f;
+    float spawnMinZ = -7f;
+    float spawnMaxZ = 82f;
+    float restartTime = 5f;
+    float normalCameraFov = 60f;
+    float scopedCameraFov = 20f;
 
     int score;
     int smallGunTargets = 2;
@@ -46,14 +58,33 @@ public class GameManager : MonoBehaviour
     }
 
     //Update is called once per frame
-    private void Update ()
+    private void Update()
     {
+        if (!gun.smallGunDrawed && !gameOver)
+        {
+            if (Input.GetButton("Fire2"))
+            {
+                sniperCrosshair.SetActive(false);
+                sniperScope.SetActive(true);
+                Camera.main.fieldOfView = scopedCameraFov;
+            }
+            else if (Input.GetButtonUp("Fire2"))
+            {
+                sniperScope.SetActive(false);
+                sniperCrosshair.SetActive(true);
+                Camera.main.fieldOfView = normalCameraFov;
+            }
+        }
         if (enemyCount <= 0)
         {
+            sniperScope.SetActive(false);
+            Camera.main.fieldOfView = normalCameraFov;
             endScreen.SetActive(true);
+            if(!gun.smallGunDrawed) sniperCrosshair.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             gameOver = true;
+            StartCoroutine(GameRestart(restartTime));
         }
     }
 
@@ -78,13 +109,19 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         gameOver = false;
-        Debug.Log("restart");
     }
 
     //Main menu game method
     public void MainMenu ()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-        Debug.Log("Main menu");
+    }
+
+    //Coroutine for game restarting
+    IEnumerator GameRestart(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

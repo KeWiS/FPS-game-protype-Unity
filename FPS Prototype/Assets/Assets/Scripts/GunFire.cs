@@ -10,6 +10,7 @@ public class GunFire : MonoBehaviour
     //public float bulletSpeed = 100f;
 
     public GameObject bullet;
+    public GameObject impactPrefab;
     //public GameObject smallBulletPos;
     //public GameObject sniperBulletPos;
     
@@ -41,6 +42,7 @@ public class GunFire : MonoBehaviour
                 {
                     target.TakeDamage(smallDamage);
                 }
+                Instantiate(impactPrefab, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
             }
         }
         else
@@ -53,6 +55,7 @@ public class GunFire : MonoBehaviour
                 {
                     target.TakeDamage(sniperDamage);
                 }
+                Instantiate(impactPrefab, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
             }
         }
     }

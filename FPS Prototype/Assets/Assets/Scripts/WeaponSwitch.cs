@@ -5,8 +5,9 @@ public class WeaponSwitch : MonoBehaviour
     //Public variables
     public GameObject smallGun;
     public GameObject sniperRifle;
-    //Private variables
-    bool smallGunDrawed = true;
+    public GameObject smallGunCrosshair;
+    
+    public bool smallGunDrawed = true;
 	// Update is called once per frame
 	void Update ()
     {
@@ -17,7 +18,7 @@ public class WeaponSwitch : MonoBehaviour
         }
     }
     //Weapon switching method
-    void GunSwitch ()
+    public void GunSwitch ()
     {
         //Checking if small gun is drawed, first is true
         if (smallGunDrawed)
@@ -26,6 +27,7 @@ public class WeaponSwitch : MonoBehaviour
             smallGun.SetActive(false);
             sniperRifle.SetActive(true);
             smallGunDrawed = false;
+            smallGunCrosshair.SetActive(false);
         }
         else
         {
@@ -33,6 +35,7 @@ public class WeaponSwitch : MonoBehaviour
             sniperRifle.SetActive(false);
             smallGun.SetActive(true);
             smallGunDrawed = true;
+            smallGunCrosshair.SetActive(true);
         }
     }
 }

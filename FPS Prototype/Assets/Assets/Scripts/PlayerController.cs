@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
     bool isGrounded;
 
     Vector3 gravityVelocity;
-
     // Update is called once per frame
     void Update ()
     {

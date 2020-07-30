@@ -11,23 +11,28 @@ public class WeaponSwitch : MonoBehaviour
 	void Update ()
     {
         //Checking if player pressed Q key
-		if(Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            //Checking if small gun is drawed, first is true
-            if(smallGunDrawed)
-            {
-                //Changing weapon to sniper rifle
-                smallGun.SetActive(false);
-                sniperRifle.SetActive(true);
-                smallGunDrawed = false;
-            }
-            else
-            {
-                //Changing weapon to small gun
-                sniperRifle.SetActive(false);
-                smallGun.SetActive(true);
-                smallGunDrawed = true;
-            }
+            GunSwitch();
         }
-	}
+    }
+    //Weapon switching method
+    void GunSwitch ()
+    {
+        //Checking if small gun is drawed, first is true
+        if (smallGunDrawed)
+        {
+            //Changing weapon to sniper rifle
+            smallGun.SetActive(false);
+            sniperRifle.SetActive(true);
+            smallGunDrawed = false;
+        }
+        else
+        {
+            //Changing weapon to small gun
+            sniperRifle.SetActive(false);
+            smallGun.SetActive(true);
+            smallGunDrawed = true;
+        }
+    }
 }

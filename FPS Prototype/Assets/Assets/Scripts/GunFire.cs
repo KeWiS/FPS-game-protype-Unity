@@ -3,7 +3,8 @@
 public class GunFire : MonoBehaviour
 {
     //Public variables
-    public float damage = 10f;
+    public float smallDamage = 20f;
+    public float sniperDamage = 50f;
     public float sniperRange = 1000f;
     public float smallRange = 350f;
     
@@ -26,14 +27,22 @@ public class GunFire : MonoBehaviour
         {
             if(Physics.Raycast(gameCamera.transform.position, gameCamera.transform.forward, out hitInfo, smallRange))
             {
-                
+                HitTarget target = hitInfo.transform.GetComponent<HitTarget>();
+                if(target != null)
+                {
+                    target.TakeDamage(smallDamage);
+                }
             }
         }
         else
         {
             if(Physics.Raycast(gameCamera.transform.position, gameCamera.transform.forward, out hitInfo, sniperRange))
             {
-
+                HitTarget target = hitInfo.transform.GetComponent<HitTarget>();
+                if (target != null)
+                {
+                    target.TakeDamage(sniperDamage);
+                }
             }
         }
     }

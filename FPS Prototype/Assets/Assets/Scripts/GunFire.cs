@@ -9,6 +9,9 @@ public class GunFire : MonoBehaviour
     public float smallRange = 350f;
     public float smallForce = 25f;
     public float sniperForce = 75f;
+    public float smallFireRate = 10f;
+    public float sniperFireRate = 0.1f;
+    public float nextTimeToFire = 0f;
 
     //public float bulletSpeed = 100f;
 
@@ -26,9 +29,18 @@ public class GunFire : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && Time.time >= nextTimeToFire)
         {
-            Shoot();
+            if (gun.smallGunDrawed)
+            {
+                nextTimeToFire = Time.time + 1f / smallFireRate;
+                Shoot();
+            }
+            else
+            {
+                nextTimeToFire = Time.time + 1f / sniperFireRate;
+                Shoot();
+            }
         }
 	}
     //Shooting gun method

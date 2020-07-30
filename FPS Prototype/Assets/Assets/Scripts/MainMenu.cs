@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour {
     {
         //Loading to game scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        //Hiding and locking cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }

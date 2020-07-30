@@ -109,11 +109,11 @@ public class GameManager : MonoBehaviour
     //Restarting game method
     public void RestartGame()
     {
+        //Reloading scene
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         //Hiding and locking cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        //Reloading scene
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         //Setting gameOver state to false
         gameOver = false;
     }

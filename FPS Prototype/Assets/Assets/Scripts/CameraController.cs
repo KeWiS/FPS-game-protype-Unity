@@ -20,7 +20,8 @@ public class CameraController : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         //Locking cursor for camera movement
         Cursor.lockState = CursorLockMode.Locked;
-	}
+        Cursor.visible = false;
+    }
 	
 	//Update is called once per frame
 	void Update ()

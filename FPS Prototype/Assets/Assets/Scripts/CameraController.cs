@@ -6,23 +6,29 @@ public class CameraController : MonoBehaviour
     public float mouseSensitivity = 125f;
 
     public Transform playerBody;
+
+    public GameManager gameManager;
     //Private variables
     float xRotation = 0f;
 
 	//Use this for initialization
 	void Start ()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         Cursor.lockState = CursorLockMode.Locked;
 	}
 	
 	//Update is called once per frame
 	void Update ()
     {
-        //Getting mouse inputs
-        float xAxis = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float yAxis = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
-        LookVertical(yAxis);
-        LookHorizontal(xAxis);
+        if (!gameManager.gameOver)
+        {
+            //Getting mouse inputs
+            float xAxis = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+            float yAxis = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+            LookVertical(yAxis);
+            LookHorizontal(xAxis);
+        }
     }
     //Player looking vertical method
     void LookVertical (float yAxis)

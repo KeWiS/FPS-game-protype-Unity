@@ -26,20 +26,32 @@ public class GunFire : MonoBehaviour
 
     public ParticleSystem smallMuzzleFlash;
     public ParticleSystem sniperMuzzleFlash;
-    // Update is called once per frame
+
+    public GameManager gameManager;
+
+    //Use this for initialization
+    void Start()
+    {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
+
+    //Update is called once per frame
     void Update ()
     {
-        if (Input.GetButtonDown("Fire1") && Time.time >= nextTimeToFire)
+        if (!gameManager.gameOver)
         {
-            if (gun.smallGunDrawed)
+            if (Input.GetButtonDown("Fire1"))
             {
-                nextTimeToFire = Time.time + 1f / smallFireRate;
-                Shoot();
-            }
-            else
-            {
-                nextTimeToFire = Time.time + 1f / sniperFireRate;
-                Shoot();
+                if (gun.smallGunDrawed)
+                {
+                    nextTimeToFire = Time.time + 1f / smallFireRate;
+                    Shoot();
+                }
+                else
+                {
+                    nextTimeToFire = Time.time + 1f / sniperFireRate;
+                    Shoot();
+                }
             }
         }
 	}

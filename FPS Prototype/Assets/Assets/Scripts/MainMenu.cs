@@ -2,12 +2,16 @@
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
-    public void PlayGame()
+    //Play button action method
+    public void PlayGame ()
     {
+        //Loading to game scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
-    public void ExitGame()
+    //Exit button action method
+    public void ExitGame ()
     {
+        //Quit application
         Application.Quit();
     }
 }

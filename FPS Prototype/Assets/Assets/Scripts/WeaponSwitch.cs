@@ -7,15 +7,27 @@ public class WeaponSwitch : MonoBehaviour
     public GameObject sniperRifle;
     public GameObject smallGunCrosshair;
     public GameObject sniperRifleCrosshair;
-    
+
+    public GameManager gameManager;
+
     public bool smallGunDrawed = true;
-	// Update is called once per frame
-	void Update ()
+
+    //Use this for initialization
+    void Start()
     {
-        //Checking if player pressed Q key
-        if (Input.GetKeyDown(KeyCode.Q))
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
+
+    //Update is called once per frame
+    void Update ()
+    {
+        if (!gameManager.gameOver)
         {
-            GunSwitch();
+            //Checking if player pressed Q key
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                GunSwitch();
+            }
         }
     }
     //Weapon switching method

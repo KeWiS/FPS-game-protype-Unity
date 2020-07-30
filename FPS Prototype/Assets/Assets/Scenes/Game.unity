@@ -911,6 +911,22 @@ Prefab:
       propertyPath: sniperMuzzleParticles
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 114315788543377452, guid: cfcb332d67619214087fa9778edd768a,
+        type: 2}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 1900734910723676, guid: 67c3c990b6c48af469e31db314977502,
+        type: 2}
+    - target: {fileID: 114315788543377452, guid: cfcb332d67619214087fa9778edd768a,
+        type: 2}
+      propertyPath: smallBulletPos
+      value: 
+      objectReference: {fileID: 2099843797}
+    - target: {fileID: 114315788543377452, guid: cfcb332d67619214087fa9778edd768a,
+        type: 2}
+      propertyPath: sniperBulletPos
+      value: 
+      objectReference: {fileID: 2084188628}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cfcb332d67619214087fa9778edd768a, type: 2}
   m_IsPrefabParent: 0
@@ -1272,6 +1288,27 @@ Prefab:
       propertyPath: sniperMuzzleParticles
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 114417764576231144, guid: 3905b13fa53e6344eaaeb6993247e29d,
+        type: 2}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 1900734910723676, guid: 67c3c990b6c48af469e31db314977502,
+        type: 2}
+    - target: {fileID: 114417764576231144, guid: 3905b13fa53e6344eaaeb6993247e29d,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114417764576231144, guid: 3905b13fa53e6344eaaeb6993247e29d,
+        type: 2}
+      propertyPath: smallBulletPos
+      value: 
+      objectReference: {fileID: 2099843797}
+    - target: {fileID: 114417764576231144, guid: 3905b13fa53e6344eaaeb6993247e29d,
+        type: 2}
+      propertyPath: sniperBulletPos
+      value: 
+      objectReference: {fileID: 2084188628}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3905b13fa53e6344eaaeb6993247e29d, type: 2}
   m_IsPrefabParent: 0
@@ -1411,7 +1448,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1561958601429444, guid: d9dd3540785d68441a99861bf6cd9a3d, type: 2}
       propertyPath: m_TagString
-      value: EnemyTarget
+      value: SmallEnemyTarget
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d9dd3540785d68441a99861bf6cd9a3d, type: 2}
@@ -1509,3 +1546,59 @@ Transform:
   m_PrefabParentObject: {fileID: 4384874954717432, guid: cfcb332d67619214087fa9778edd768a,
     type: 2}
   m_PrefabInternal: {fileID: 882952324}
+--- !u!1 &2084188628
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2084188629}
+  m_Layer: 0
+  m_Name: SniperBulletPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2084188629
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2084188628}
+  m_LocalRotation: {x: -0, y: -0.04564964, z: -0, w: 0.9989575}
+  m_LocalPosition: {x: -0.0051, y: 0.0449, z: 0.5685}
+  m_LocalScale: {x: 0.49999997, y: 0.5, z: 0.49999997}
+  m_Children: []
+  m_Father: {fileID: 2059504099}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2099843797
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2099843798}
+  m_Layer: 0
+  m_Name: SmallBulletPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2099843798
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2099843797}
+  m_LocalRotation: {x: -0.5271533, y: -0.47128484, z: -0.47128484, w: -0.5271533}
+  m_LocalPosition: {x: 0.80929583, y: 0.00071740133, z: 0.4130001}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1844205824}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -7,6 +7,11 @@ public class GunFire : MonoBehaviour
     public float sniperDamage = 50f;
     public float sniperRange = 1000f;
     public float smallRange = 350f;
+    //public float bulletSpeed = 100f;
+
+    public GameObject bullet;
+    //public GameObject smallBulletPos;
+    //public GameObject sniperBulletPos;
     
     public Camera gameCamera;
 
@@ -32,7 +37,7 @@ public class GunFire : MonoBehaviour
             if (Physics.Raycast(gameCamera.transform.position, gameCamera.transform.forward, out hitInfo, smallRange))
             {
                 HitTarget target = hitInfo.transform.GetComponent<HitTarget>();
-                if(target != null)
+                if(target != null && target.CompareTag("SmallEnemyTarget"))
                 {
                     target.TakeDamage(smallDamage);
                 }
@@ -44,7 +49,7 @@ public class GunFire : MonoBehaviour
             if (Physics.Raycast(gameCamera.transform.position, gameCamera.transform.forward, out hitInfo, sniperRange))
             {
                 HitTarget target = hitInfo.transform.GetComponent<HitTarget>();
-                if (target != null)
+                if (target != null && target.CompareTag("SniperEnemyTarget"))
                 {
                     target.TakeDamage(sniperDamage);
                 }

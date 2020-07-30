@@ -11,6 +11,9 @@ public class GunFire : MonoBehaviour
     public Camera gameCamera;
 
     public WeaponSwitch gun;
+
+    public ParticleSystem smallMuzzleFlash;
+    public ParticleSystem sniperMuzzleFlash;
     // Update is called once per frame
     void Update ()
     {
@@ -21,11 +24,12 @@ public class GunFire : MonoBehaviour
 	}
     //Shooting gun method
     void Shoot ()
-    {
+    { 
         RaycastHit hitInfo;
         if (gun.smallGunDrawed)
         {
-            if(Physics.Raycast(gameCamera.transform.position, gameCamera.transform.forward, out hitInfo, smallRange))
+            smallMuzzleFlash.Play();
+            if (Physics.Raycast(gameCamera.transform.position, gameCamera.transform.forward, out hitInfo, smallRange))
             {
                 HitTarget target = hitInfo.transform.GetComponent<HitTarget>();
                 if(target != null)
@@ -36,7 +40,8 @@ public class GunFire : MonoBehaviour
         }
         else
         {
-            if(Physics.Raycast(gameCamera.transform.position, gameCamera.transform.forward, out hitInfo, sniperRange))
+            sniperMuzzleFlash.Play();
+            if (Physics.Raycast(gameCamera.transform.position, gameCamera.transform.forward, out hitInfo, sniperRange))
             {
                 HitTarget target = hitInfo.transform.GetComponent<HitTarget>();
                 if (target != null)

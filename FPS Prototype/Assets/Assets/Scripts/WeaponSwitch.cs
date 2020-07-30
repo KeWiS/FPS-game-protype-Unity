@@ -6,6 +6,7 @@ public class WeaponSwitch : MonoBehaviour
     public GameObject smallGun;
     public GameObject sniperRifle;
     public GameObject smallGunCrosshair;
+    public GameObject sniperRifleCrosshair;
     
     public bool smallGunDrawed = true;
 	// Update is called once per frame
@@ -28,6 +29,7 @@ public class WeaponSwitch : MonoBehaviour
             sniperRifle.SetActive(true);
             smallGunDrawed = false;
             smallGunCrosshair.SetActive(false);
+            sniperRifleCrosshair.SetActive(true);
         }
         else
         {
@@ -36,6 +38,7 @@ public class WeaponSwitch : MonoBehaviour
             smallGun.SetActive(true);
             smallGunDrawed = true;
             smallGunCrosshair.SetActive(true);
+            sniperRifleCrosshair.SetActive(false);
         }
     }
 }

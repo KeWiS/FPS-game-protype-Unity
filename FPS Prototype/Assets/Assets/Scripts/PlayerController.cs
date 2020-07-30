@@ -40,8 +40,24 @@ public class PlayerController : MonoBehaviour
             float zAxis = Input.GetAxis("Vertical");
             //Calling moving method
             Move(xAxis, zAxis);
-            //Calling jumping method
-            Jump();
+            //Checking if player pressed jump button
+            if (isGrounded && Input.GetButtonDown("Jump"))
+            {
+                //Calling jumping method
+                Jump();
+            }
+            //Checking if player pressed crouch button (left shift)
+            if (isGrounded && Input.GetButton("Fire3"))
+            {
+                //Calling crouching method
+                Crouch();
+            }
+            //Checking if player released crouch button
+            if(Input.GetButtonUp("Fire3"))
+            {
+                //Calling standing up method
+                StandUp();
+            }
             //Calling gravity calculations method
             Gravity();
             //Calling ground check method
@@ -59,10 +75,17 @@ public class PlayerController : MonoBehaviour
     void Jump ()
     {
         //Allowing player to jump y = sqrt(h * -2 * g)
-        if (isGrounded && Input.GetButtonDown("Jump"))
-        {
-            gravityVelocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
-        }
+        gravityVelocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
+    }
+    //Player crouching method
+    void Crouch ()
+    {
+        playerSpeed = 6f;
+    }
+    //Player standup method
+    void StandUp ()
+    {
+        playerSpeed = 13f;
     }
     //Gravity calculation and application method
     void Gravity ()

@@ -7,6 +7,8 @@ public class MainMenu : MonoBehaviour {
     {
         //Loading to game scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
     //Exit button action method
     public void ExitGame ()

@@ -7,6 +7,9 @@ public class GunFire : MonoBehaviour
     public float sniperDamage = 50f;
     public float sniperRange = 1000f;
     public float smallRange = 350f;
+    public float smallForce = 25f;
+    public float sniperForce = 75f;
+
     //public float bulletSpeed = 100f;
 
     public GameObject bullet;
@@ -42,6 +45,12 @@ public class GunFire : MonoBehaviour
                 {
                     target.TakeDamage(smallDamage);
                 }
+
+                if(hitInfo.rigidbody != null)
+                {
+                    hitInfo.rigidbody.AddForce(-hitInfo.normal * smallForce, ForceMode.Impulse);
+                }
+
                 Instantiate(impactPrefab, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
             }
         }
@@ -55,6 +64,12 @@ public class GunFire : MonoBehaviour
                 {
                     target.TakeDamage(sniperDamage);
                 }
+
+                if (hitInfo.rigidbody != null)
+                {
+                    hitInfo.rigidbody.AddForce(-hitInfo.normal * sniperForce, ForceMode.Impulse);
+                }
+
                 Instantiate(impactPrefab, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
             }
         }
